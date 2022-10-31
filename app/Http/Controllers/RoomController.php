@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Room;
-use App\Services\FileUploadService;
-use Illuminate\Http\Request;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
