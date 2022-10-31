@@ -22,7 +22,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
+        $token = auth('api')->attempt($credentials);
         if (!$token) {
             return response()->json([
                 'status' => 'error',
@@ -30,7 +30,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
+        $user = auth('api')->user();
         return response()->json([
                 'status' => 'success',
                 'user' => $user,
@@ -55,7 +55,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $token = Auth::login($user);
+        $token = auth('api')->login($user);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
@@ -69,7 +69,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        auth('api')->logout();
         return response()->json([
             'status' => 'success',
             'message' => 'Successfully logged out',
@@ -80,7 +80,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user(),
+            'user' => auth('api')->user(),
         ]);
     }
 
@@ -88,9 +88,9 @@ class AuthController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user(),
+            'user' => auth('api')->user(),
             'authorisation' => [
-                'token' => Auth::refresh(),
+                'token' => auth('api')->refresh(),
                 'type' => 'bearer',
             ]
         ]);
