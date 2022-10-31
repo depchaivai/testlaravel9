@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Room;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Cloudinary\Api\Upload\UploadApi;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -20,7 +20,7 @@ class RoomController extends Controller
             ]
         );
         
-        $file = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $file = (new UploadApi())->upload($request->file('image'));
         if ($file) {
             $validated['image'] = $file;
         }
@@ -35,7 +35,7 @@ class RoomController extends Controller
                 'name' => ['required'],
             ]
         );
-        $file = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $file = (new UploadApi())->upload($request->file('image'));
         if ($file) {
             $validated['image'] = $file;
         }
