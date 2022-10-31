@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use Cloudinary\Api\Upload\UploadApi;
 use App\Models\Room;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
@@ -14,7 +13,7 @@ class RoomController extends Controller
         return Room::all();
     }
 
-    public function store(Request $request, FileUploadService $fileUpload)
+    public function store(Request $request)
     {
         $validated = $request->validate(
             [
@@ -30,7 +29,7 @@ class RoomController extends Controller
         return Room::create($validated);
     }
 
-    public function updateRoom(Request $request, $id, FileUploadService $fileUpload)
+    public function updateRoom(Request $request, $id)
     {
         $validated = $request->validate(
             [
