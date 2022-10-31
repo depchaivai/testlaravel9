@@ -15,20 +15,20 @@ return [
     |
     */
 
-    'paths' => ['api/*', '*'],
+    'paths' => ['axios/*'],
 
-    'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', '*'],
+    'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', 'PATCH'],
 
-    'allowed_origins' => ['http://localhost:3000', '127.0.0.1:3000','*'],
+    'allowed_origins' => ['http://localhost:3000', '127.0.0.1:3000', 'sofapt.vercel.app'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['X-Custom-Header', 'Upgrade-Insecure-Requests','*'],
+    'allowed_headers' => ['*'],
 
     'exposed_headers' => [],
 
-    'max_age' => 0,
+    'max_age' => 3600,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

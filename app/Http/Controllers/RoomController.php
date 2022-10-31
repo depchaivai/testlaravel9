@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class RoomController extends Controller
 {
@@ -20,9 +21,10 @@ class RoomController extends Controller
                 'name' => ['required'],
             ]
         );
-        $file = $fileUpload->uploadFile($request->file('image'));
+        $result = $request->file('image')->storeOnCloudinary();
+        $file =  $result->getPublicId();
         if ($file) {
-            $validated['image'] = "storage/$file";
+            $validated['image'] = $file;
         }
         $validated['slug'] = changeTitle($validated['name']);
         return Room::create($validated);
