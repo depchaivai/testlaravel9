@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', 'PATCH'],
 
-    'allowed_origins' => ['http://localhost:3000', '127.0.0.1:3000', 'sofapt.vercel.app'],
+    'allowed_origins' => ['sofapt.vercel.app','http://sofapt.vercel.app','https://sofapt.vercel.app'],
 
     'allowed_origins_patterns' => [],
 
