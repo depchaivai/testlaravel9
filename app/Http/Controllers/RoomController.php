@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class RoomController extends Controller
 {
@@ -19,14 +20,12 @@ class RoomController extends Controller
                 'name' => ['required'],
             ]
         );
-        $cloudinary = new \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-        return $cloudinary;
-        // $file = $cloudinary->upload($request->file('file')->getRealPath())->getSecurePath();
-        // if ($file) {
-        //     $validated['image'] = $file;
-        // }
-        // $validated['slug'] = changeTitle($validated['name']);
-        // return Room::create($validated);
+        $file = Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
+        if ($file) {
+            $validated['image'] = $file;
+        }
+        $validated['slug'] = changeTitle($validated['name']);
+        return Room::create($validated);
     }
 
     public function updateRoom(Request $request, $id)
