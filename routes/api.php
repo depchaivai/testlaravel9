@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
+Route::get('/auth/check', [AuthController::class, 'checkLogin']);
 // Route::apiResources([
 //     'material' => MaterialController::class,
 //     'material-type' => MaterialTypeController::class,

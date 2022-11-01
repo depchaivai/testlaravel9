@@ -98,4 +98,10 @@ class AuthController extends Controller
             ], 500);
         }
     }
+    public function checkLogin(){
+        if (Auth::user()) {
+            return true;
+        }
+        return false;
+    }
 }
