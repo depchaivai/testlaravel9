@@ -99,6 +99,9 @@ class AuthController extends Controller
         }
     }
     public function checkLogin(){
-        return auth('sanctum')->check();
+        if (auth('sanctum')->check()) {
+            return ['status'=>true];
+        }
+        return ['status'=>false];
     }
 }
