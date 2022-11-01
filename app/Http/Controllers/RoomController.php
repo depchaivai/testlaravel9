@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App;
 use App\Models\Room;
 use Illuminate\Http\Request;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class RoomController extends Controller
 {
