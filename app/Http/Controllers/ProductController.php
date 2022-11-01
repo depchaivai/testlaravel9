@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Room;
-use App\Services\FileUploadService;
+use App\Services\CloudinarySerVice;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,24 +17,24 @@ class ProductController extends Controller
         return Product::with('images')->get();
     }
 
-    public function store(ProductRequest $request, FileUploadService $fileUpload)
+    public function store(ProductRequest $request, CloudinarySerVice $fileUpload)
     {
         $file = $fileUpload->uploadFile($request->file('image'));
         $validated = $request->safe()->merge($request->all())->toArray();
         $validated['slug'] = changeTitle($validated['name']);
         if ($file) {
-            $validated['image'] = "storage/$file";
+            $validated['image'] = $file;
         }
         $item = Product::create($validated);
         if ($item) {
             $allowType = ['jpg', 'jpeg', 'png', 'gif', 'webb' . 'svg'];
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $f) {
-                    $fs = $fileUpload->uploadFile($f, $allowType, "products/$item->sku", 'public');
+                    $fs = $fileUpload->uploadFile($f);
                     if ($fs) {
                         ProductImage::create([
                             "product" => $item->id,
-                            "image" => "storage/$fs"
+                            "image" => $fs
                         ]);
                     }
                 }
@@ -43,13 +43,13 @@ class ProductController extends Controller
         return $item;
     }
 
-    public function editProduct(ProductRequest $request, $id, FileUploadService $fileUpload)
+    public function editProduct(ProductRequest $request, $id, CloudinarySerVice $fileUpload)
     {
         $file = $fileUpload->uploadFile($request->file('image'));
         $validated = $request->validated();
         $validated['slug'] = changeTitle($validated['name']);
         if ($file) {
-            $validated['image'] = "storage/$file";
+            $validated['image'] = $file;
         }
         $item = Product::find($id);
         $updated = $item->update($validated);
@@ -57,11 +57,11 @@ class ProductController extends Controller
             $allowType = ['jpg', 'jpeg', 'png', 'gif', 'webb' . 'svg'];
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $f) {
-                    $fs = $fileUpload->uploadFile($f, $allowType, "product/$item->sku", 'public');
+                    $fs = $fileUpload->uploadFile($f);
                     if ($fs) {
                         ProductImage::create([
                             "product" => $item->id,
-                            "image" => "storage/$fs"
+                            "image" => $fs
                         ]);
                     }
                 }

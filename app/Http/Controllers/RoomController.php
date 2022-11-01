@@ -21,7 +21,7 @@ class RoomController extends Controller
         );
         $name = $request->file('image')->getClientOriginalName();
         $filename = pathinfo($name, PATHINFO_FILENAME);
-        $result = $request->file('image')->storeOnCloudinaryAs('product',$filename)->getPublicId();
+        $result = $request->file('image')->storeOnCloudinaryAs('product',$filename)->getSecurePath();
         if ($result) {
             $validated['image'] = $result;
         }
@@ -38,7 +38,7 @@ class RoomController extends Controller
         );
         $name = $request->file('image')->getClientOriginalName();
         $filename = pathinfo($name, PATHINFO_FILENAME);
-        $result = $request->file('image')->storeOnCloudinaryAs('product',$filename)->getPublicId();
+        $result = $request->file('image')->storeOnCloudinaryAs('product',$filename)->getSecurePath();
         if ($result) {
             $validated['image'] = $result;
         }

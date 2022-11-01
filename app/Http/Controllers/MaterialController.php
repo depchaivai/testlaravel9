@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MRequest;
 use App\Models\Material;
+use App\Services\CloudinarySerVice;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 
@@ -26,14 +27,14 @@ class MaterialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MRequest $request, FileUploadService $fileUpload)
+    public function store(MRequest $request, CloudinarySerVice $fileUpload)
     {
         $file = $fileUpload->uploadFile($request->file('image'));  
         $validated = $request->validated();
         $validated['slug'] = changeTitle($validated['name']);
         $validated['eng_name'] = changeTitle($validated['name']);
         if ($file) {
-            $validated['image'] = "storage/$file";
+            $validated['image'] = $file;
         }
         return Material::create($validated);
     }
@@ -56,14 +57,14 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editMaterial(MRequest $request, $id, FileUploadService $fileUpload)
+    public function editMaterial(MRequest $request, $id, CloudinarySerVice $fileUpload)
     {
         $file = $fileUpload->uploadFile($request->file('image'));  
         $validated = $request->validated();
         $validated['slug'] = changeTitle($validated['name']);
         $validated['eng_name'] = changeTitle($validated['name']);
         if ($file) {
-            $validated['image'] = "storage/$file";
+            $validated['image'] = $file;
         }
         return Material::find($id)->update($validated);
     }
