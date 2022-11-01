@@ -15,6 +15,7 @@ class FileUploadService
                 return false;
             }
         }
-        return Storage::disk($disk)->put($dir,$file);
+        return Storage::disk('cloudinary')->put('product',$file);
+        // return Storage::disk($disk)->put($dir,$file);
     }
 }

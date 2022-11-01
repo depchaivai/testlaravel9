@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Room;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
-use \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class RoomController extends Controller
 {
@@ -12,14 +12,14 @@ class RoomController extends Controller
         return Room::all();
     }
 
-    public function store(Request $request)
+    public function store(Request $request, FileUploadService $fileUpload)
     {
         $validated = $request->validate(
             [
                 'name' => ['required'],
             ]
         );
-        $file = Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
+        $file = $fileUpload->uploadFile($request->file('image'));
         if ($file) {
             $validated['image'] = $file;
         }
@@ -27,14 +27,14 @@ class RoomController extends Controller
         return Room::create($validated);
     }
 
-    public function updateRoom(Request $request, $id)
+    public function updateRoom(Request $request, $id, FileUploadService $fileUpload)
     {
         $validated = $request->validate(
             [
                 'name' => ['required'],
             ]
         );
-        $file = Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
+        $file = $fileUpload->uploadFile($request->file('image'));
         if ($file) {
             $validated['image'] = $file;
         }
