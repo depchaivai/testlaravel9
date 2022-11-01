@@ -35,7 +35,7 @@ class RoomController extends Controller
                 'name' => ['required'],
             ]
         );
-        $file = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+        $file = Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
         if ($file) {
             $validated['image'] = $file;
         }
