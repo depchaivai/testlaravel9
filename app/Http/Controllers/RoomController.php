@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Room;
 use Illuminate\Http\Request;
-use Cloudinary;
 
 class RoomController extends Controller
 {
