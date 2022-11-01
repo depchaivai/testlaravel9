@@ -12,7 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/updateapp', function()
+{
+    \Artisan::call('dump-autoload');
+    echo 'dump-autoload complete';
+});
+Route::get('/updateapp2', function()
+{
+    \Artisan::call('composer dump-autoload');
+    echo 'dump-autoload complete';
+});
 Route::get('/', function () {
     return view('welcome');
 });

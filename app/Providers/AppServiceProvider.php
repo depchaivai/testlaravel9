@@ -2,12 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Filesystem\FilesystemAdapter;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Storage;
+use App\Models\PersonalAccessToken;
 use Illuminate\Support\ServiceProvider;
-use League\Flysystem\Filesystem;
-use Yoelpc4\LaravelCloudinary\CloudinaryAdapter;
+use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,10 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Storage::extend('cloudinary', function (Application $app, array $config) {
-            $adapter = new CloudinaryAdapter($config);
-
-            return new FilesystemAdapter(new Filesystem($adapter, $config), $adapter, $config);
-        });
+        //
     }
 }
