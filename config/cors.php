@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', 'PATCH'],
 
-    'allowed_origins' => ['sofapt.vercel.app','http://sofapt.vercel.app','https://sofapt.vercel.app'],
+    'allowed_origins' => ['https://sofapt.flashvps.xyz/','http://sofapt.flashvps.xyz/','sofapt.flashvps.xyz','sofapt.vercel.app','http://sofapt.vercel.app','https://sofapt.vercel.app'],
 
     'allowed_origins_patterns' => [],
 
