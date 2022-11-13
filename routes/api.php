@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MaterialTypeController;
 use App\Http\Controllers\ProductController;
@@ -64,6 +65,7 @@ Route::prefix('product')->name('product')->group(function(){
     route::get('/make_decided/{id}',[ProductController::class,'makeDecided']);
     route::get('/get_by_cate/{cate}',[ProductController::class,'getByCate']);
     route::get('/get_by_room/{room}',[ProductController::class,'getByRoom']);
+    Route::get('/samira/{id}',[ProductController::class,'getSamiraList']);
 });
 
 Route::prefix('category')->name('product')->group(function(){
@@ -73,4 +75,11 @@ Route::prefix('category')->name('product')->group(function(){
     Route::put('/update/{id}',[CategoryController::class,'editCate']);
     Route::get('/get_list_slug',[CategoryController::class,'getListSlug']);
     Route::get('/get_by_slug/{slug}',[CategoryController::class,'getBySlug']);
+});
+
+Route::prefix('info')->name('info')->group(function(){
+    Route::get('/',[InfoController::class,'index']);
+    Route::post('/',[InfoController::class,'store']);
+    Route::delete('/destroy/{id}',[InfoController::class,'destroy']);
+    Route::put('/update/{id}',[InfoController::class,'editInfo']);
 });

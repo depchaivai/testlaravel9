@@ -119,5 +119,11 @@ class ProductController extends Controller
         return Product::where('decide',true)->take(8)->get();
     }
 
+    public function getSamiraList($id)
+    {
+        $item = Product::find($id);
+        return Product::where('collection',$item->collection)->orWhere('category',$item->collection)->orWhere('room',$item->room)->with('images')->take(10)->get();
+    }
+
 
 }
