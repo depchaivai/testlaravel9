@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductCate;
 use App\Models\ProductImage;
 use App\Models\Room;
 use App\Services\CloudinarySerVice;
@@ -14,7 +15,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return Product::with('images')->get();
+        return Product::with(['images','cates'])->get();
     }
 
     public function store(ProductRequest $request, CloudinarySerVice $fileUpload)
@@ -37,6 +38,14 @@ class ProductController extends Controller
                             "image" => $fs
                         ]);
                     }
+                }
+            }
+            if ($request['cates']) {
+                foreach ($request['cates'] as $anotherCate) {
+                    ProductCate::create([
+                        'product_id' => $item->id,
+                        'cate_id' => $anotherCate
+                    ]);
                 }
             }
         }
@@ -66,6 +75,14 @@ class ProductController extends Controller
                     }
                 }
             }
+            if ($request->cates) {
+                foreach ($request->cates as $anotherCate) {
+                    ProductCate::create([
+                        'product_id' => $item->id,
+                        'cate_id' => $anotherCate
+                    ]);
+                }
+            }
         }
         return $item;
     }
@@ -93,7 +110,9 @@ class ProductController extends Controller
     public function getByCate($cate)
     {   
         $category = Category::where('slug', $cate)->first();
-        return Product::where('category', $category->id)->with('images')->get();
+        return Product::whereHas('cates',function($q)use($category){
+            $q->where('cate_id',$category->id);
+        })->orWhere('category', $category->id)->with('images')->get();
     }
 
     public function getByRoom($room)
@@ -125,5 +144,9 @@ class ProductController extends Controller
         return Product::where('collection',$item->collection)->orWhere('category',$item->collection)->orWhere('room',$item->room)->with('images')->take(10)->get();
     }
 
+    public function destroyProductCate($id)
+    {
+        return ProductCate::destroy($id);
+    }
 
 }

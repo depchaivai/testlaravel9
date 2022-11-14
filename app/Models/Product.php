@@ -15,4 +15,7 @@ class Product extends Model
     public function images(){
         return $this->hasMany(ProductImage::class,'product','id');
     }
+    public function cates(){
+        return $this->belongsToMany(Category::class,'product_cate','product_id','cate_id')->withPivot('id');
+    }
 }

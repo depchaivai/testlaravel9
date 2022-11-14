@@ -57,6 +57,7 @@ Route::prefix('product')->name('product')->group(function(){
     Route::delete('/destroy/{id}',[ProductController::class,'destroy']);
     Route::put('/update/{id}',[ProductController::class,'editProduct']);
     Route::delete('/image/destroy/{id}',[ProductController::class,'deleteProductImage']);
+    Route::delete('/cate/destroy/{id}',[ProductController::class,'destroyProductCate']);
     Route::get('/get_list_slug',[ProductController::class,'getListSlug']);
     Route::get('/get_by_slug/{slug}',[ProductController::class,'getBySlug']);
     route::get('/get_by_cate/{cate}',[ProductController::class,'getByCate']);
