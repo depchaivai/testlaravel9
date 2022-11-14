@@ -64,7 +64,6 @@ Route::prefix('product')->name('product')->group(function(){
     route::get('/get_new_list',[ProductController::class,'getNewList']);
     route::get('/get_decide_list',[ProductController::class,'getDecideList']);
     route::get('/make_decided/{id}',[ProductController::class,'makeDecided']);
-    route::get('/get_by_cate/{cate}',[ProductController::class,'getByCate']);
     route::get('/get_by_room/{room}',[ProductController::class,'getByRoom']);
     Route::get('/samira/{id}',[ProductController::class,'getSamiraList']);
 });
