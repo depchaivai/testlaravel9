@@ -66,6 +66,7 @@ Route::prefix('product')->name('product')->group(function(){
     route::get('/make_decided/{id}',[ProductController::class,'makeDecided']);
     route::get('/get_by_room/{room}',[ProductController::class,'getByRoom']);
     Route::get('/samira/{id}',[ProductController::class,'getSamiraList']);
+    Route::get('/tag/destroy/{id}',[ProductController::class,'destroyTag']);
 });
 
 Route::prefix('category')->name('product')->group(function(){

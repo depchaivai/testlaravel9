@@ -61,6 +61,13 @@ class ProductController extends Controller
             $validated['image'] = $file;
         }
         $item = Product::find($id);
+        if ($request['tags']) {
+            $validated['tags'] = $request['tags'];
+            if ($item->tags) {
+                $validated['tags'] = $validated['tags'].','.$item->tags;
+            }
+        }
+        
         $updated = $item->update($validated);
         if ($updated) {
             $allowType = ['jpg', 'jpeg', 'png', 'gif', 'webb' . 'svg'];
@@ -147,6 +154,27 @@ class ProductController extends Controller
     public function destroyProductCate($id)
     {
         return ProductCate::destroy($id);
+    }
+
+    public function destroyTag(Request $request,$id){
+        $tag = $request->tag;
+        if ($tag) {
+            $product = Product::find($id);
+            $tagArr = explode(',',$product->tags);
+            foreach ($tagArr as $key => $tagitem) {
+                if ($tagitem == $tag) {
+                    unset($tagArr[$key]);
+                    break;
+                }
+            }
+            $tagArr = array_values($tagArr);
+            $newTagString = implode(',',$tagArr);
+            $product->update(['tags' => $newTagString]);
+        }
+        else{
+            return 0;
+        }
+        return 1;
     }
 
 }
