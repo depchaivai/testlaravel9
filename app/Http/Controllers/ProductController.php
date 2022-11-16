@@ -111,7 +111,7 @@ class ProductController extends Controller
 
     public function getBySlug($slug)
     {
-        return Product::where('slug', $slug)->with('images')->first();
+        return Product::where('slug', $slug)->with(['images','cates'])->first();
     }
 
     public function getByCate($cate)
@@ -148,7 +148,7 @@ class ProductController extends Controller
     public function getSamiraList($id)
     {
         $item = Product::find($id);
-        return Product::where('collection',$item->collection)->orWhere('category',$item->collection)->orWhere('room',$item->room)->with('images')->take(10)->get();
+        return Product::where('collection',$item->collection)->orWhere('category',$item->category)->orWhere('room',$item->room)->with('images')->take(10)->get();
     }
 
     public function destroyProductCate($id)

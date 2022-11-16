@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColectionController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MaterialTypeController;
@@ -83,4 +84,11 @@ Route::prefix('info')->name('info')->group(function(){
     Route::post('/',[InfoController::class,'store']);
     Route::delete('/destroy/{id}',[InfoController::class,'destroy']);
     Route::put('/update/{id}',[InfoController::class,'editInfo']);
+});
+
+Route::prefix('collection')->name('collection')->group(function(){
+    Route::get('/',[ColectionController::class,'index']);
+    Route::post('/',[ColectionController::class,'store']);
+    Route::delete('/destroy/{id}',[ColectionController::class,'destroy']);
+    Route::put('/update/{id}',[ColectionController::class,'editCollection']);
 });
