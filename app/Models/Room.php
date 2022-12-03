@@ -11,6 +11,6 @@ class Room extends Model
     protected $table = 'room';
     public $timestamps = false;
     protected $fillable  = [
-        'name','slug','image'
+        'name','slug','image','eng_name','eng_slug'
     ];
 }

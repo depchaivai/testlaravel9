@@ -10,5 +10,5 @@ class Category extends Model
     use HasFactory;
     protected $table = "categories";
     public $timestamps = false;
-    protected $fillable  = ['name','eng_name','slug','parent_id'];
+    protected $fillable  = ['name','eng_name','slug','eng_slug','parent_id'];
 }

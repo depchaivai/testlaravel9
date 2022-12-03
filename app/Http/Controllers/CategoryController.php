@@ -15,12 +15,20 @@ class CategoryController extends Controller
     public function store(CateRequest $request){
         $validated = $request->validated();
         $validated['slug'] = changeTitle($validated['name']);
+        if ($validated['eng_name']) {
+            $eng_slug = \Str::slug($validated['eng_name'],'-');
+            $validated['eng_slug'] = $eng_slug;
+        }
         return Category::create($validated);
     }
 
     public function editCate(CateRequest $request,$id){
         $validated = $request->validated();
         $validated['slug'] = changeTitle($validated['name']);
+        if ($validated['eng_name']) {
+            $eng_slug = \Str::slug($validated['eng_name'],'-');
+            $validated['eng_slug'] = $eng_slug;
+        }
         return Category::find($id)->update($validated);
     }
 
@@ -30,6 +38,10 @@ class CategoryController extends Controller
 
     public function getListSlug(){
         return Category::pluck('slug');
+    }
+
+    public function getListEngSlug(){
+        return Category::where('eng_slug','<>',null)->pluck('eng_slug');
     }
 
     public function getBySlug($slug){

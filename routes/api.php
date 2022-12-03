@@ -60,6 +60,7 @@ Route::prefix('product')->name('product')->group(function(){
     Route::delete('/image/destroy/{id}',[ProductController::class,'deleteProductImage']);
     Route::delete('/cate/destroy/{id}',[ProductController::class,'destroyProductCate']);
     Route::get('/get_list_slug',[ProductController::class,'getListSlug']);
+    Route::get('/get_list_eng_slug',[ProductController::class,'getListEngSlug']);
     Route::get('/get_by_slug/{slug}',[ProductController::class,'getBySlug']);
     route::get('/get_by_cate/{cate}',[ProductController::class,'getByCate']);
     route::get('/get_new_list',[ProductController::class,'getNewList']);
@@ -76,6 +77,7 @@ Route::prefix('category')->name('product')->group(function(){
     Route::delete('/destroy/{id}',[CategoryController::class,'destroy']);
     Route::put('/update/{id}',[CategoryController::class,'editCate']);
     Route::get('/get_list_slug',[CategoryController::class,'getListSlug']);
+    Route::get('/get_list_eng_slug',[CategoryController::class,'getListEngSlug']);
     Route::get('/get_by_slug/{slug}',[CategoryController::class,'getBySlug']);
 });
 

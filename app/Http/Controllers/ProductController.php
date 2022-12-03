@@ -26,6 +26,9 @@ class ProductController extends Controller
         if ($file) {
             $validated['image'] = $file;
         }
+        if ($validated['eng_name']) {
+            $validated['eng_slug'] = \Str::slug($validated['eng_name'],'-');
+        }
         $item = Product::create($validated);
         if ($item) {
             $allowType = ['jpg', 'jpeg', 'png', 'gif', 'webb' . 'svg'];
@@ -67,7 +70,16 @@ class ProductController extends Controller
                 $validated['tags'] = $validated['tags'].','.$item->tags;
             }
         }
-        
+        if ($request->eng_name) {
+            $validated['eng_name'] = $request->eng_name;
+            $validated['eng_slug'] = \Str::slug($request->eng_name,'-');
+        }
+        if ($request->eng_description) {
+            $validated['eng_description'] = $request->eng_description;
+        }
+        if ($request->long_eng_description) {
+            $validated['long_eng_description'] = $request->long_eng_description;
+        }
         $updated = $item->update($validated);
         if ($updated) {
             $allowType = ['jpg', 'jpeg', 'png', 'gif', 'webb' . 'svg'];
@@ -107,6 +119,10 @@ class ProductController extends Controller
     public function getListSlug()
     {
         return Product::pluck('slug');
+    }
+
+    public function getListEngSlug(){
+        return Product::where('eng_slug','<>',null)->pluck('eng_slug');
     }
 
     public function getBySlug($slug)

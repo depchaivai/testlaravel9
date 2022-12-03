@@ -25,6 +25,10 @@ class RoomController extends Controller
         if ($result) {
             $validated['image'] = $result;
         }
+        if ($request->eng_name){
+            $validated['eng_name'] = $request->eng_name;
+            $validated['eng_slug'] = \Str::slug($request->eng_name,'-');
+        }
         $validated['slug'] = changeTitle($validated['name']);
         return Room::create($validated);
     }
@@ -36,11 +40,17 @@ class RoomController extends Controller
                 'name' => ['required'],
             ]
         );
-        $name = $request->file('image')->getClientOriginalName();
-        $filename = pathinfo($name, PATHINFO_FILENAME);
-        $result = $request->file('image')->storeOnCloudinaryAs('product',$filename)->getSecurePath();
-        if ($result) {
-            $validated['image'] = $result;
+        if ($request->file('image')) {
+            $name = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($name, PATHINFO_FILENAME);
+            $result = $request->file('image')->storeOnCloudinaryAs('product', $filename)->getSecurePath();
+            if ($result) {
+                $validated['image'] = $result;
+            }
+        }
+        if ($request->eng_name){
+            $validated['eng_name'] = $request->eng_name;
+            $validated['eng_slug'] = \Str::slug($request->eng_name,'-');
         }
         $validated['slug'] = changeTitle($validated['name']);
         return Room::find($id)->update($validated);
