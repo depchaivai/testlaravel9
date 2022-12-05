@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColectionController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MaterialTypeController;
@@ -93,4 +94,9 @@ Route::prefix('collection')->name('collection')->group(function(){
     Route::post('/',[ColectionController::class,'store']);
     Route::delete('/destroy/{id}',[ColectionController::class,'destroy']);
     Route::put('/update/{id}',[ColectionController::class,'editCollection']);
+});
+
+Route::prefix('images')->name('images')->group(function(){
+    Route::get('/',[ImageController::class,'index']);
+    Route::post('/',[ImageController::class,'store']);
 });
