@@ -99,4 +99,5 @@ Route::prefix('collection')->name('collection')->group(function(){
 Route::prefix('images')->name('images')->group(function(){
     Route::get('/',[ImageController::class,'index']);
     Route::post('/',[ImageController::class,'store']);
+    Route::delete('/destroy/{id}',[ImageController::class,'destroy']);
 });

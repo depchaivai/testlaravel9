@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ImageController extends Controller
 {
     public function index(){
-        return Images::all();
+        return Images::orderBy('updated_at', 'DESC')->get();
     }
 
     public function store(Request $request, CloudinarySerVice $fileUpload){
@@ -23,5 +23,9 @@ class ImageController extends Controller
             $newImage->save();
         }
         return ['success' => false];
+    }
+    
+    public function destroy($id){
+        return Images::destroy($id);
     }
 }
