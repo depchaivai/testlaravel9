@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColectionController;
+use App\Http\Controllers\Content_controller;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\MaterialController;
@@ -100,4 +101,11 @@ Route::prefix('images')->name('images')->group(function(){
     Route::get('/',[ImageController::class,'index']);
     Route::post('/',[ImageController::class,'store']);
     Route::delete('/destroy/{id}',[ImageController::class,'destroy']);
+});
+
+Route::prefix('contents')->name('contents')->group(function(){
+    Route::get('/',[Content_controller::class,'index']);
+    Route::post('/',[Content_controller::class,'store']);
+    Route::put('/update/{id}',[Content_controller::class,'editContent']);
+    Route::delete('/destroy/{id}',[Content_controller::class,'destroy']);
 });
