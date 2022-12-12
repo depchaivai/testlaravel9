@@ -64,4 +64,21 @@ class Content_controller extends Controller
     public function destroy($id){
         return Content::destroy($id);
     }
+    
+    public function getListSlug(){
+        return Content::pluck('slug');
+    }
+
+    public function getBySlug($slug){
+        return Content::where('slug', $slug)->first();
+    }
+
+    public function getByKind($kind){
+        return Content::where('kind', $kind)->get();
+    }
+
+    public function getSimilar($id){
+        $post = Content::find($id);
+        return Content::where('kind', $post->kind)->orderBy('created_at','DESC')->take(10)->get();
+    }
 }

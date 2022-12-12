@@ -108,4 +108,8 @@ Route::prefix('contents')->name('contents')->group(function(){
     Route::post('/',[Content_controller::class,'store']);
     Route::put('/update/{id}',[Content_controller::class,'editContent']);
     Route::delete('/destroy/{id}',[Content_controller::class,'destroy']);
+    Route::get('/get_list_slug',[Content_controller::class,'getListSlug']);
+    Route::get('/get_by_slug/{slug}',[Content_controller::class,'getBySlug']);
+    Route::get('/get_by_kind/{kind}',[Content_controller::class,'getByKind']);
+    Route::get('/get_similar/{id}',[Content_controller::class,'getSimilar']);
 });
