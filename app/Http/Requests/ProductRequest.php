@@ -64,6 +64,12 @@ class ProductRequest extends FormRequest
             ],
             'long' => [
                 'nullable'
+            ],
+            'width' => [
+                'nullable'
+            ],
+            'eng_name' => [
+                'nullable'
             ]
         ];
     }
