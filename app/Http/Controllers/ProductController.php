@@ -74,11 +74,29 @@ class ProductController extends Controller
             $validated['eng_name'] = $request->eng_name;
             $validated['eng_slug'] = \Str::slug($request->eng_name,'-');
         }
+        if ($request->description) {
+            $validated['description'] = $request->description;
+        }
         if ($request->eng_description) {
             $validated['eng_description'] = $request->eng_description;
         }
+        if ($request->long_description) {
+            $validated['long_description'] = $request->long_description;
+        }
         if ($request->long_eng_description) {
             $validated['long_eng_description'] = $request->long_eng_description;
+        }
+        if ($request->weight) {
+            $validated['weight'] = $request->weight;
+        }
+        if ($request->long) {
+            $validated['long'] = $request->long;
+        }
+        if ($request->long) {
+            $validated['deep'] = $request->deep;
+        }
+        if ($request->width) {
+            $validated['width'] = $request->width;
         }
         $updated = $item->update($validated);
         if ($updated) {

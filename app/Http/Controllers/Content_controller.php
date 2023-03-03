@@ -14,6 +14,11 @@ class Content_controller extends Controller
         return Content::all();
     }
 
+    public function getAllNotPolicy()
+    {
+        return Content::where('kind','<>','policy')->get();
+    }
+
     public function store(Request $request, CloudinarySerVice $fileUpload)
     {
         $validated = $request->validate(

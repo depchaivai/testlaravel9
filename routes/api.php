@@ -112,4 +112,5 @@ Route::prefix('contents')->name('contents')->group(function(){
     Route::get('/get_by_slug/{slug}',[Content_controller::class,'getBySlug']);
     Route::get('/get_by_kind/{kind}',[Content_controller::class,'getByKind']);
     Route::get('/get_similar/{id}',[Content_controller::class,'getSimilar']);
+    Route::get('/all_not_policy',[Content_controller::class,'getAllNotPolicy']);
 });
