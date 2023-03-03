@@ -43,6 +43,27 @@ class ProductRequest extends FormRequest
             ],
             'collection' => [
                 'numeric',
+            ],
+            'description' => [
+                'nullable'
+            ],
+            'long_description' => [
+                'nullable'
+            ],
+            'eng_description' => [
+                'nullable'
+            ],
+            'long_eng_description' => [
+                'nullable'
+            ],
+            'deep' => [
+                'nullable'
+            ],
+            'weight' => [
+                'nullable'
+            ],
+            'long' => [
+                'nullable'
             ]
         ];
     }
